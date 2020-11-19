@@ -3,7 +3,7 @@ import './login.css';
 import Rain from './rain.png'
 import water from './water.png'
 import ReactRain from 'react-rain-animation';
- 
+import umb from './umbrella.png'
 // import all the styles
 import "react-rain-animation/lib/style.css";
 class Login extends React.Component{
@@ -34,6 +34,7 @@ class Login extends React.Component{
           </div>
           <div className="login_title">
               <p>우산 알리미</p>
+              <img src={umb} height="30px" width="30px"/>
           </div>
           <div className="login_input">
               <div className="login_input_in">
