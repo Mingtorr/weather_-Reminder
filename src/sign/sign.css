@@ -1,0 +1,169 @@
+.login_div{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.login1{
+    display: flex;
+    flex: 0.05;
+    justify-content: center;
+    align-items: center;
+}
+.login3{
+    display: flex;
+    flex: 0.05;
+}
+.login2{
+    display: flex;
+    flex: 0.8;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 12px;
+}
+.margin1{
+    background-color: black;
+    display: flex;
+    flex: 0.3;
+}
+.margin2{
+    z-index: 2;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 12px;
+    display: flex;
+    width: calc(350px + 2vmin);
+    flex-direction: column;
+}
+.sign_title{
+    display: flex;
+    flex-direction: row;
+}
+.sign_title p{
+    color: #5fa2d6;
+    font-family: 'Jua', sans-serif;
+    font-size: calc(20px + 2vmin);
+    margin:0
+}
+.sign_input1{
+    flex: 0.143;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.sign_label{
+    flex: 0.4;
+    display: flex;
+    background-color: white;
+    align-items: center;
+}
+.sign_label p{
+    margin: 0;
+    margin-left: 20px;
+    font-family: 'Jua', sans-serif;
+}
+.sign_input_1{
+    flex: 0.6;
+    display: flex;
+    justify-content: center;
+}
+.sign_input_1 input{
+    width: calc(270px + 2vmin);
+    height: 30px;
+    margin-top: 8px;
+    border-radius: 8px;
+    outline: none;
+    border:1px solid rgb(201, 201, 201);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.sign_label button{
+    margin-left: 200px;
+}
+#pw_info{
+    font-size: 12px;
+    margin: 0;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+.sign_label button{
+    background-color: #3273ff;
+    border: 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.sign_label button:hover{
+    background-color: #9dbaf8;
+}
+.email_code button{
+    background-color: #3273ff;
+    border: 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.email_code button:hover{
+    background-color: #9dbaf8;
+}
+.email_code{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+.email_code input{
+    height: 28px;
+    margin-top: 8px;
+    border-radius: 8px;
+    outline: none;
+    border:1px solid rgb(201, 201, 201);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.email_code button{
+    margin-left: 30px;
+    margin-top: 10px;
+}
+#sign_button{
+    height: 40px;
+    background-color: #3273ff;
+    border: 0;
+    border-radius: 0px;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    outline: none;
+}
+
+#sign_button:hover{
+    background-color: #9dbaf8;
+}
+.end2{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
+.end2 p{
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+.sign_input3{
+    flex: 0.143;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    justify-content: flex-end;
+}

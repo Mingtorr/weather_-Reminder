@@ -59,7 +59,7 @@ app.post("/sign_up", async function(req,res,next){
 })
 
 //로그인 salt 적용
-router.post("/login", async function(req,res,next){
+app.post("/login", async function(req,res,next){
   let body = req.body;
   let dbPassword;
   let salt;
@@ -90,7 +90,7 @@ router.post("/login", async function(req,res,next){
 });
 
 
-router.post("/Sendmail", (req, res) => {
+app.post("/Sendmail", (req, res) => {
   const email = req.body.sendEmail;
   var authNum = Math.floor(Math.random() * 1000000) + 100000;
   if (authNum > 1000000) {
