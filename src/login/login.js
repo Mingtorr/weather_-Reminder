@@ -27,7 +27,7 @@ class Login extends React.Component{
                          <p>아이디</p>
                     </div>
                     <div className="input1">
-                            <input/>
+                            <input placeholder="ID"/>
                     </div>
                   </div>
                   <div className="login_input1">
@@ -35,7 +35,7 @@ class Login extends React.Component{
                          <p>비밀번호</p>
                     </div>
                     <div className="input1">
-                            <input/>
+                            <input placeholder="Password"/>
                     </div>
                   </div>
                   <div className="login_input2">

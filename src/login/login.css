@@ -8,12 +8,14 @@ div.login_title{
     align-items: flex-start;
     justify-content: center;
     margin-bottom: 0px;
+    z-index: 1;
 }
 .login_title p{
     color: #5fa2d6;
     font-family: 'Jua', sans-serif;
     font-size: calc(20px + 2vmin);
-    margin:0
+    margin:0;
+    z-index: 1;
 }
 .login_picture{
     width: 100%;
@@ -22,10 +24,12 @@ div.login_title{
     justify-content: center;
     margin-bottom: 0px;
     margin-top: 50px;
+    z-index: 1;
 }
 .login_picture_in img{
     width: calc(250px + 2vmin);
     height: 30vh;
+    z-index: 1;
 }
 .login_picture_in{
     display: flex;
@@ -44,6 +48,7 @@ div.login_title{
     height: 40vh;
     background-color: white;
     border-radius: 12px;
+    z-index: 1;
 }
 .login_input1{
     width: 100%;
@@ -145,7 +150,7 @@ div.login_title{
 .rain1{
     width: 20px;
     height: 20px;
-
+    z-index: 0;
     margin-right: 7.5vw;
     margin-left: 7.5vw;
     position: relative;
@@ -160,6 +165,7 @@ div.login_title{
     height: 20px;
     margin-right: 7.5vw;
     margin-left: 7.5vw;
+    z-index: 0;
     position: relative;
     top: 0;
     left: 0;
@@ -172,6 +178,7 @@ div.login_title{
     height: 20px;
     margin-right: 7.5vw;
     margin-left: 7.5vw;
+    z-index: 0;
     position: relative;
     top: 0;
     left: 0;
@@ -184,6 +191,7 @@ div.login_title{
     height: 20px;
     margin-right: 7.5vw;
     margin-left: 7.5vw;
+    z-index: 0;
     position: relative;
     top: 0;
     left: 0;
@@ -219,6 +227,6 @@ div.login_title{
         top: 0px;
     }
     100%{
-        top: 100vh;
+        top: 95vh;
     }
 }

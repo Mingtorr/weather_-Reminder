@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+.main{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+}
+.main1{
+    display: flex;
+    flex: 0.2;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+.main1 p{
+    color: #5fa2d6;
+    font-family: 'Jua', sans-serif;
+    font-size: calc(20px + 2vmin);
+    margin:0;
+    z-index: 1;
+}
+.main2{
+    display: flex;
+    flex-direction: column;
+    flex: 0.2;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+}
+.main2 p{
+    color: black;
+    font-family: 'Jua', sans-serif;
+    font-size: 20px;
+    margin:0;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+.main2 select{
+    height: 30px;
+    width: 100px;
+    z-index: 1;
+}
+.main3{
+    display: flex;
+    flex: 0.3;
+    justify-content: center;
+    z-index: 1;
+}
+.main3 button{
+    width: 250px;
+    height: 50px;
+    background-color: #3273ff;
+    border: 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    z-index: 1;
+}
+.main3 button:hover{
+    background-color: #9dbaf8;
+}
+.circle {
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:80px;
+    animation-name: circle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    z-index: 1;
+    
+}
+
+@keyframes circle{
+    0%   {bottom: 200px; left: 130px; background: #9dbaf8;}
+  25%  {bottom: 200px; right: 250px; background: #89aaf1;}
+  50%  {bottom: 300px; right: 250px; background: #759cf1;}
+  75%  {bottom: 300px; left: 130px; background: #abc3f8;}
+  100% {bottom: 200px; left: 130px; background: #6e9bfc;}
+}
+
+#region{
+    margin-bottom: 30px;
+}
+
+#email_time{
+    margin-bottom: 30px;
+}
+.main2{
+    display: flex;
+    justify-content: center;
+}
