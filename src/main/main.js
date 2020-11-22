@@ -3,6 +3,7 @@ import './main.css';
 import umb from './umbrella.png'
 import Main2 from './main2'
 import Raining from '../login/rain'
+import Rain from './rain.png'
 export default class Main extends React.Component{
     constructor(props){
         super(props);
@@ -134,6 +135,7 @@ export default class Main extends React.Component{
         return(
             <div className="main">
               <Raining/>
+              
                 <div className="main1">
                     <p style={{marginRight:10}}>우산 알리미</p>
                     <img src={umb} height="30px" width="30px"/>
@@ -142,7 +144,11 @@ export default class Main extends React.Component{
                   {this.state.data}
                   {this.state.main}
                 </div>
+                <div id="logout">
+                    <button>로그아웃</button>
+                  </div>
                 <div className="main3">
+                  
                   {this.state.progress}
                   {this.state.progress2}
                 </div>

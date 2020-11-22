@@ -5,6 +5,10 @@
     width: 100vw;
     height: 100vh;
     flex-direction: column;
+    background-image: url('./back.png') ;
+    background-size: 100% 100%;
+    background-position: center top;
+    background-repeat: no-repeat;
 }
 .main1{
     display: flex;
@@ -12,6 +16,7 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
+    margin-top: 100px;
 }
 .main1 p{
     color: #5fa2d6;
@@ -81,16 +86,15 @@
     animation-name: circle;
     animation-duration: 4s;
     animation-iteration-count: infinite;
-    z-index: 1;
     
 }
 
 @keyframes circle{
-    0%   {bottom: 200px; left: 130px; background: #9dbaf8;}
-  25%  {bottom: 200px; right: 250px; background: #89aaf1;}
-  50%  {bottom: 300px; right: 250px; background: #759cf1;}
-  75%  {bottom: 300px; left: 130px; background: #abc3f8;}
-  100% {bottom: 200px; left: 130px; background: #6e9bfc;}
+    0%   {bottom: 100px; left: 130px; background: #9dbaf8;}
+  25%  {bottom: 100px; right: 250px; background: #89aaf1;}
+  50%  {bottom: 200px; right: 250px; background: #759cf1;}
+  75%  {bottom: 200px; left: 130px; background: #abc3f8;}
+  100% {bottom: 100px; left: 130px; background: #6e9bfc;}
 }
 
 #region{
@@ -103,4 +107,52 @@
 .main2{
     display: flex;
     justify-content: center;
+}
+
+#logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+#logout button{
+    width: 250px;
+    height: 50px;
+    background-color: #fc625d;
+    border: 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    z-index: 1;
+}
+
+#mydata{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+#mydata button{
+    width: 250px;
+    height: 50px;
+    background-color: #29a753;
+    border: 0;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    z-index: 1;
+}
+
+#grom{
+    background-color: red;
 }
