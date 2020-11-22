@@ -128,7 +128,7 @@ export default class Main extends React.Component{
         progress:<button onClick={this.onclick}>신청하기</button>,
             progress2:'',
             main:<Main2/>,
-            data:''
+            data:'asdasd'
       })
     }
     render(){
