@@ -7,7 +7,8 @@ const mysql = require("mysql");
 // nodemailer 모듈 요청
 const nodemailer = require("nodemailer");
 //salt 암호화 모듈
-const crypto = require('crypto');
+const crypto = require("crypto");
+var http = require("http").createServer(app);
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -25,70 +26,85 @@ app.use(bodyparser.json());
 // 아이디 중복체크
 app.post("/CheckId", (req, res) => {
   const checkId = req.body.check_Id;
-  connection.query(
-    "SELECT user_id FROM user_info WHERE user_id =(?)",
-    [checkId],
-    function (err, rows, fields) {
-      if (rows[0] === undefined) {
-        res.send(true); //중복 없음 사용가능
-      } else {
-        res.send(false); // 중복 있음 사용안됨
-      }
+  connection.query("SELECT user_id FROM user_info WHERE user_id =(?)", [checkId], function (err, rows, fields) {
+    if (rows[0] === undefined) {
+      res.send(true); //중복 없음 사용가능
+    } else {
+      res.send(false); // 중복 있음 사용안됨
     }
-  );
+  });
 });
 
 // 회원가입 salt를 이용한 hash 암호화
-app.post("/sign_up", async function(req,res,next){
+app.post("/Signup", async function (req, res, next) {
   let body = req.body;
-
-  let inputPassword = body.password;
-  let salt = Math.round((new Date().valueOf() * Math.random())) + "";
-  let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
-  connection.query(
-    "insert into user_info (user_id,user_salt, user_passwd, user_email,user_location,user_sendtime) values (?,?,?,?,?,?)",
-    [body.id ,salt ,hashPassword, body.email, body.location, body.sendtime],
-    function (err, rows, fields) {
-      if (err) {
-        console.log("sign_up error");
-        res.send(false);
-      } else {
-        res.send(true);
-      }
-  })
-})
+  let inputPassword = body.passwd;
+  let salt = Math.round(new Date().valueOf() * Math.random()) + "";
+  let hashPassword = crypto
+    .createHash("sha512")
+    .update(inputPassword + salt)
+    .digest("hex");
+  connection.query("insert into user_info (user_id,user_salt, user_passwd, user_email) values (?,?,?,?)", [body.id, salt, hashPassword, body.email], function (err, rows, fields) {
+    if (err) {
+      console.log("sign_up error");
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  });
+});
 
 //로그인 salt 적용
-app.post("/login", async function(req,res,next){
+app.post("/login", async function (req, res, next) {
   let body = req.body;
   let dbPassword;
   let salt;
-  connection.query(
-  "SELECT user_id,user_salt,user_passwd FROM user_info WHERE user_id = (?)",
-      [body.user_id],
-    function (err, rows, fields) {
-      if (rows[0] === undefined) {
+  connection.query("SELECT user_id,user_salt,user_passwd FROM user_info WHERE user_id = (?)", [body.id], function (err, rows, fields) {
+    if (rows === undefined) {
+      res.send(false);
+    } else {
+      dbPassword = rows[0].user_passwd;
+      salt = rows[0].user_salt;
+      let inputPassword = body.passwd;
+
+      let hashPassword = crypto
+        .createHash("sha512")
+        .update(inputPassword + salt)
+        .digest("hex");
+      if (dbPassword === hashPassword) {
+        console.log("비밀번호 일치");
+        res.send(true);
+      } else {
+        console.log("비밀번호 불일치");
         res.send(false);
       }
-      else {
-        dbPassword = rows.user_passwd;
-        salt = rows.user_salt;
-      }
-    })
-
-  let inputPassword = body.passwd;
-  let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
-
-  if(dbPassword === hashPassword){
-      console.log("비밀번호 일치");
-      res.send(true);
-  }
-  else{
-      console.log("비밀번호 불일치");
-      res.send(false);
-  }
+    }
+  });
 });
 
+app.post("/getCity", (req, res) => {
+  let state = req.body.state;
+  connection.query("SELECT DISTINCT second FROM api_data WHERE first = (?)", [state], function (err, rows, fields) {
+    console.log(rows);
+    res.send(rows);
+  });
+});
+
+app.post("/getCity2", (req, res) => {
+  let body = req.body;
+  connection.query("SELECT DISTINCT third FROM api_data WHERE first = (?) and second = (?)", [body.city1, body.city2], function (err, rows, fields) {
+    console.log(rows);
+    res.send(rows);
+  });
+});
+
+app.post("/getCity3", (req, res) => {
+  let body = req.body;
+  connection.query("SELECT nx, ny FROM api_data WHERE first = (?) and second = (?) and third = (?)", [body.city1, body.city2, body.city3], function (err, rows, fields) {
+    console.log(rows);
+    res.send(rows);
+  });
+});
 
 app.post("/Sendmail", (req, res) => {
   const email = req.body.sendEmail;
@@ -98,26 +114,22 @@ app.post("/Sendmail", (req, res) => {
   }
 
   let emailParam = {
-    toEmail: email + "@chanwon.ac.kr", //gmail.com -> changwon.ac.kr로 수정하기
+    toEmail: email,
     subject: "회원가입 인증 메일입니다.",
     text: "인증번호는 " + authNum + "입니다.",
   };
-  connection.query(
-    "SELECT user_email FROM user_info WHERE user_email = (?)",
-    [email],
-    function (err, rows, fields) {
-      if (rows[0] === undefined) {
-        //중복된 메일 없음 메일 발송
-        mailSender.sendGmail(emailParam);
-        res.send(authNum.toString());
-      } else {
-        //중복된 메일이 있음
-        res.send(true);
-      }
+  console.log("인증번호는 " + authNum + "입니다.");
+  connection.query("SELECT user_email FROM user_info WHERE user_email = (?)", [email], function (err, rows, fields) {
+    if (rows[0] === undefined) {
+      //중복된 메일 없음 메일 발송
+      mailSender.sendGmail(emailParam);
+      res.send(authNum.toString());
+    } else {
+      //중복된 메일이 있음
+      res.send(true);
     }
-  );
+  });
 });
-
 
 var mailSender = {
   // 메일발송 함수
@@ -129,8 +141,8 @@ var mailSender = {
       secure: false,
       requireTLS: true,
       auth: {
-        user: "gjdnjsdud10@gmail.com",
-        pass: "ekdms!98",
+        user: "cwnunight@gmail.com",
+        pass: "a2586974",
       },
     });
     // 메일 옵션
