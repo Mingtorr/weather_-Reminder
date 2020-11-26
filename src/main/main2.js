@@ -23,7 +23,7 @@ export default class Main2 extends React.Component {
   }
   selectChange3st = (e) => {
     console.log(e.target.value);
-
+    
     this.setState({
       selected_city3: e.target.value,
     });

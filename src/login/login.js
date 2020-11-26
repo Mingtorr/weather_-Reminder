@@ -35,9 +35,10 @@ class Login extends React.Component {
     })
       .then((res) => res.json())
       .then((json) => {
+        console.log(json[0].user_key);
         if (json === false) alert("아이디와 비밀번호를 확인하세요");
         else {
-          window.localStorage.setItem("user", this.state.id);
+          window.localStorage.setItem("user", json[0].user_key);
           window.location.replace("/Main");
         }
       });

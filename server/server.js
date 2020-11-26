@@ -59,8 +59,9 @@ app.post("/login", async function (req, res, next) {
   let body = req.body;
   let dbPassword;
   let salt;
-  connection.query("SELECT user_id,user_salt,user_passwd FROM user_info WHERE user_id = (?)", [body.id], function (err, rows, fields) {
-    if (rows === undefined) {
+  connection.query("SELECT user_key,user_id,user_salt,user_passwd FROM user_info WHERE user_id = (?)", [body.id], function (err, rows, fields) {
+    console.log(rows);
+    if (rows === undefined || rows[0] === undefined) {
       res.send(false);
     } else {
       dbPassword = rows[0].user_passwd;
@@ -73,7 +74,8 @@ app.post("/login", async function (req, res, next) {
         .digest("hex");
       if (dbPassword === hashPassword) {
         console.log("비밀번호 일치");
-        res.send(true);
+
+        res.send(rows);
       } else {
         console.log("비밀번호 불일치");
         res.send(false);
@@ -131,6 +133,23 @@ app.post("/Sendmail", (req, res) => {
   });
 });
 
+app.post("/storeData", (req, res) => {
+  let body = req.body;
+  console.log(body);
+  connection.query("update user_info set user_sendtime =(?), user_state=(?) where user_key= (?)", [body[0], "1", body[6]], function (err, rows, fields) {
+    connection.query("SELECT user_key FROM location_table WHERE user_key = (?)", body[6], function (err, rows, fields) {
+      if (rows[0] === undefined) {
+        connection.query("insert into location_table (state,city, address, nx,ny, user_key) values (?,?,?,?,?,?)", [body[1], body[2], body[3], body[4], body[5], body[6]], function (err, rows, fields) {});
+      } else {
+        connection.query("update location_table set state=(?), city=(?), address=(?), nx=(?),ny=(?) where user_key=(?)", [body[1], body[2], body[3], body[4], body[5], body[6]], function (err, rows, fields) {});
+      }
+    });
+  });
+});
+app.post("/cancelstate", (req, res) => {
+  let body = req.body;
+  connection.query("update user_info set user_state=(?) where user_key=(?)", [0, body], function (err, rows, fields) {});
+});
 var mailSender = {
   // 메일발송 함수
   sendGmail: function (param) {
