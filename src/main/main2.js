@@ -14,16 +14,16 @@ export default class Main2 extends React.Component {
       selected_nx: "",
       selected_ny: "",
       day: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-      citycode: ["서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치도", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도", "이어도"],
-      city2: [],
-      city3: [],
+      citycode: ["지역선택", "서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치도", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도", "이어도"],
+      city2: ["지역선택"],
+      city3: ["지역선택"],
       check1: false,
       check2: false,
     };
   }
   selectChange3st = (e) => {
     console.log(e.target.value);
-    
+
     this.setState({
       selected_city3: e.target.value,
     });
@@ -53,7 +53,7 @@ export default class Main2 extends React.Component {
   selectChange2st = (e) => {
     this.setState({
       selected_city2: e.target.value,
-      city3: [],
+      city3: ["지역선택"],
     });
 
     const state = {
@@ -80,7 +80,8 @@ export default class Main2 extends React.Component {
   selectChange1st = (e) => {
     this.setState({
       selected_citycode: e.target.value,
-      city2: [],
+      city2: ["지역선택"],
+      city3: ["지역선택"],
     });
 
     const state = {
@@ -95,6 +96,13 @@ export default class Main2 extends React.Component {
     })
       .then((res) => res.json())
       .then((json) => {
+        if (json.length === 0) {
+          this.setState({
+            city2: ["지역선택"],
+            city3: ["지역선택"],
+          });
+        }
+
         json.map((el) =>
           this.setState({
             city2: this.state.city2.concat(el.second),
