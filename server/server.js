@@ -118,7 +118,28 @@ app.post("/Sendmail", (req, res) => {
   let emailParam = {
     toEmail: email,
     subject: "회원가입 인증 메일입니다.",
-    text: "인증번호는 " + authNum + "입니다.",
+    text: `<body style="margin: 0; padding: 0">
+    <div style="font-family:Apple SD Gothic Neo, sans-serif ; width: 540px; height: 600px; border-top: 4px solid #6f9df1;>
+      <h1 style=" margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400">
+      <span style="font-size: 20px; margin: 0 0 10px 3px">창원대 우산알리미</span>
+      <b style="color: #6f9df1">메일인증</b> 안내입니다.
+      </h1>
+      <p style="font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px; ">
+        안녕하세요.
+        <b style="color: #6f9df1">우산알리미</b>에 가입해 주셔서 진심으로
+        감사드립니다.
+        아래 <b style="color: #6f9df1">'인증 번호'</b>를 입력하여 회원가입을 완료해주세요.
+        감사합니다. <br />
+        인증번호: ${authNum}
+        <script>
+          document.write(authNumber);
+        </script>
+      </p>
+      <a style="color: #fff; text-decoration: none; text-align: center" href="{$auth_url}" target="_blank">
+        <p style="display: inline-block; width: 210px; height: 45px; margin: 30px 5px 40px; background: #2d73f5; line-height: 45px; vertical-align: middle; font-size: 16px;" class="move_wagle">우산알리미 홈페이지 이동</p>
+      </a>
+    </div>
+  </body>`
   };
   console.log("인증번호는 " + authNum + "입니다.");
   connection.query("SELECT user_email FROM user_info WHERE user_email = (?)", [email], function (err, rows, fields) {
