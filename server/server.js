@@ -57,15 +57,12 @@ app.post("/Signup", async function (req, res, next) {
 //로그인 salt 적용
 app.post("/login", async function (req, res, next) {
   let body = req.body;
-  let dbPassword;
-  let salt;
   connection.query("SELECT user_key,user_id,user_salt,user_passwd FROM user_info WHERE user_id = (?)", [body.id], function (err, rows, fields) {
-    console.log(rows);
     if (rows === undefined || rows[0] === undefined) {
       res.send(false);
     } else {
-      dbPassword = rows[0].user_passwd;
-      salt = rows[0].user_salt;
+      let dbPassword = rows[0].user_passwd;
+      let salt = rows[0].user_salt;
       let inputPassword = body.passwd;
 
       let hashPassword = crypto
@@ -73,12 +70,9 @@ app.post("/login", async function (req, res, next) {
         .update(inputPassword + salt)
         .digest("hex");
       if (dbPassword === hashPassword) {
-        console.log("비밀번호 일치");
-
         res.send(rows);
       } else {
         console.log("비밀번호 불일치");
-        res.send(false);
       }
     }
   });
@@ -87,7 +81,6 @@ app.post("/login", async function (req, res, next) {
 app.post("/getCity", (req, res) => {
   let state = req.body.state;
   connection.query("SELECT DISTINCT second FROM api_data WHERE first = (?)", [state], function (err, rows, fields) {
-    console.log(rows);
     res.send(rows);
   });
 });
@@ -95,7 +88,6 @@ app.post("/getCity", (req, res) => {
 app.post("/getCity2", (req, res) => {
   let body = req.body;
   connection.query("SELECT DISTINCT third FROM api_data WHERE first = (?) and second = (?)", [body.city1, body.city2], function (err, rows, fields) {
-    console.log(rows);
     res.send(rows);
   });
 });
@@ -103,7 +95,6 @@ app.post("/getCity2", (req, res) => {
 app.post("/getCity3", (req, res) => {
   let body = req.body;
   connection.query("SELECT nx, ny FROM api_data WHERE first = (?) and second = (?) and third = (?)", [body.city1, body.city2, body.city3], function (err, rows, fields) {
-    console.log(rows);
     res.send(rows);
   });
 });
@@ -139,9 +130,8 @@ app.post("/Sendmail", (req, res) => {
         <p style="display: inline-block; width: 210px; height: 45px; margin: 30px 5px 40px; background: #2d73f5; line-height: 45px; vertical-align: middle; font-size: 16px;" class="move_wagle">우산알리미 홈페이지 이동</p>
       </a>
     </div>
-  </body>`
+  </body>`,
   };
-  console.log("인증번호는 " + authNum + "입니다.");
   connection.query("SELECT user_email FROM user_info WHERE user_email = (?)", [email], function (err, rows, fields) {
     if (rows[0] === undefined) {
       //중복된 메일 없음 메일 발송
@@ -156,7 +146,6 @@ app.post("/Sendmail", (req, res) => {
 
 app.post("/storeData", (req, res) => {
   let body = req.body;
-  console.log(body);
   connection.query("update user_info set user_sendtime =(?), user_state=(?) where user_key= (?)", [body[0], "1", body[6]], function (err, rows, fields) {
     connection.query("SELECT user_key FROM location_table WHERE user_key = (?)", body[6], function (err, rows, fields) {
       if (rows[0] === undefined) {
@@ -169,8 +158,20 @@ app.post("/storeData", (req, res) => {
 });
 app.post("/cancelstate", (req, res) => {
   let body = req.body;
-  connection.query("update user_info set user_state=(?) where user_key=(?)", [0, body], function (err, rows, fields) {});
+  connection.query("update user_info set user_state=(?) where user_key=(?)", [0, body], function (err, rows, fields) {
+    if (err) {
+      console.log(err);
+    }
+  });
 });
+
+app.post("/getuserState", (req, res) => {
+  let body = req.body;
+  connection.query("SELECT D.state, D.city, D.address, E.user_sendtime FROM user_info E JOIN location_table D ON E.user_key = D.user_key and D.user_key= (?) and E.user_state=1", [body.userkey], function (err, rows, fields) {
+    res.send(rows);
+  });
+});
+
 var mailSender = {
   // 메일발송 함수
   sendGmail: function (param) {
@@ -187,7 +188,7 @@ var mailSender = {
     });
     // 메일 옵션
     var mailOptions = {
-      from: "gjdnjsdud10@gmail.com",
+      from: "cwnunight@gmail.com",
       to: param.toEmail, // 수신할 이메일
       subject: param.subject, // 메일 제목
       text: param.text, // 메일 내용

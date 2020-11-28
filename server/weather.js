@@ -1,20 +1,17 @@
 const express = require("express");
 const app = express();
 const port = 3003;
-const cors = require("cors");
-const bodyparser = require("body-parser");
 const mysql = require("mysql");
 // nodemailer 모듈 요청
 const nodemailer = require("nodemailer");
 const request = require("request");
-//salt 암호화 모듈
-const crypto = require("crypto");
-var parseString = require("xml2js").parseString; //xml을 json 으로 변환
+
 var moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 var date2 = moment().format("YYYYMMDD");
 var http = require("http").createServer(app);
+
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -24,12 +21,10 @@ var connection = mysql.createConnection({
 
 connection.connect();
 //bodyparser및 cors 사용
-app.use(bodyparser.urlencoded({ extended: false }));
-app.use(cors());
-app.use(bodyparser.json());
 
 var time = 26;
 var interval = setInterval(test, 1000);
+
 var mailSender = {
   // 메일발송 함수
   sendGmail: function (param) {

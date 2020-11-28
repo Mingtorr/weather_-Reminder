@@ -118,7 +118,6 @@ export default class Main2 extends React.Component {
   };
   componentDidUpdate() {
     if (this.state.check1 === true && this.state.check2 === true) {
-      console.log("hi");
       const box = [this.state.selected, this.state.selected_citycode, this.state.selected_city2, this.state.selected_city3, this.state.selected_nx, this.state.selected_ny];
       this.props.tounder(box);
     }

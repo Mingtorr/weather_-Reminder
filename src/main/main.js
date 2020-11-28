@@ -19,17 +19,43 @@ export default class Main extends React.Component {
     if (localStorage.getItem("user") === null) {
       window.location.href = "/";
       alert("로그인하세요");
+      return;
     }
+    const box = { userkey: localStorage.getItem("user") };
+    fetch("http://localhost:3001/getuserState", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(box),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json[0] === undefined) return;
+        else {
+          this.setState({
+            progress: <button onClick={this.onclickcancle}>취소하기</button>,
+            progress2: <div className="circle"></div>,
+            main: "",
+            cart: this.state.cart.concat(localStorage.getItem("user")),
+            data: (
+              <p>
+                선택한시간 {json[0].user_sendtime}:00 지역:{json[0].state}
+                {json[0].city}
+                {json[0].address}
+              </p>
+            ),
+          });
+        }
+      });
   }
 
   tounder = (box) => {
     this.setState({
       cart: box,
     });
-    console.log(box);
   };
   onclick = () => {
-    console.log(localStorage.getItem("user"));
     if (this.state.cart.length === 0) {
       alert("이메일을 받을 시간과 지역을 선택하세요!!");
     } else {

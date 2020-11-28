@@ -28,7 +28,6 @@ export default class Sign extends React.Component {
       },
       this.checkpw
     );
-    console.log(e.target.value);
   };
 
   checkpw = () => {
@@ -66,7 +65,6 @@ export default class Sign extends React.Component {
           alert("이미 가입된 메일입니다.");
         } else {
           alert("인증 메일이 전송되었습니다.");
-          console.log(json);
           this.setState({
             authNum: json,
           });
@@ -147,7 +145,6 @@ export default class Sign extends React.Component {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log();
           if (json) {
             alert("회원가입 성공");
             window.location.href = "/";
