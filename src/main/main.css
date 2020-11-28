@@ -5,11 +5,21 @@
     width: 100vw;
     height: 100vh;
     flex-direction: column;
-    background-image: url('./back.png') ;
+}
+.main::before {    
+    content: "";
+    background-image: url('./background.jpg') ;
     background-size: 100% 100%;
     background-position: center top;
     background-repeat: no-repeat;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.25;
 }
+
 .main1{
     display: flex;
     flex: 0.2;
@@ -19,7 +29,7 @@
     margin-top: 100px;
 }
 .main1 p{
-    color: #5fa2d6;
+    color: #0d75c5;
     font-family: 'Jua', sans-serif;
     font-size: calc(20px + 2vmin);
     margin:0;

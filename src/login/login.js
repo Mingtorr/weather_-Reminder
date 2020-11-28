@@ -45,7 +45,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <form onSubmit={this.onSubmit}>
           <Raining />
           <div className="login_picture">
