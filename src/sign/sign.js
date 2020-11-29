@@ -52,7 +52,7 @@ export default class Sign extends React.Component {
     const email = {
       sendEmail: this.state.email,
     };
-    fetch("http://localhost:3001/Sendmail", {
+    fetch("api/Sendmail", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -97,12 +97,12 @@ export default class Sign extends React.Component {
     e.preventDefault();
     var re = /^[a-zA-Z0-9]{4,12}$/; //아이디는 4~12자의 영문 대소문자와 숫자로만 입력
     if (!this.check(re, this.state.id, "아이디는 4~12자의 영문 대소문자와 숫자로만 입력가능합니다.")) {
-      return false;
+      return;
     } else {
       const checkId = {
         check_Id: this.state.id,
       };
-      fetch("http://localhost:3001/CheckId", {
+      fetch("api/CheckId", {
         method: "post",
         headers: {
           "content-type": "application/json",
@@ -136,7 +136,7 @@ export default class Sign extends React.Component {
         passwd: this.state.passwd2,
         email: this.state.email,
       };
-      fetch("http://localhost:3001/Signup", {
+      fetch("api/Signup", {
         method: "post",
         headers: {
           "content-type": "application/json",

@@ -28,7 +28,7 @@ class Login extends React.Component {
       id: this.state.id,
       passwd: this.state.passwd,
     };
-    fetch("http://localhost:3001/login", {
+    fetch("api/login", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(post),

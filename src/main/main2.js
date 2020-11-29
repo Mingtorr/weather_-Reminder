@@ -33,7 +33,7 @@ export default class Main2 extends React.Component {
       city2: this.state.selected_city2,
       city1: this.state.selected_citycode,
     };
-    fetch("http://localhost:3001/getCity3", {
+    fetch("api/getCity3", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -60,7 +60,7 @@ export default class Main2 extends React.Component {
       city2: e.target.value,
       city1: this.state.selected_citycode,
     };
-    fetch("http://localhost:3001/getCity2", {
+    fetch("api/getCity2", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -87,7 +87,7 @@ export default class Main2 extends React.Component {
     const state = {
       state: e.target.value,
     };
-    fetch("http://localhost:3001/getCity", {
+    fetch("api/getCity", {
       method: "post",
       headers: {
         "content-type": "application/json",

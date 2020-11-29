@@ -22,7 +22,7 @@ export default class Main extends React.Component {
       return;
     }
     const box = { userkey: localStorage.getItem("user") };
-    fetch("http://localhost:3001/getuserState", {
+    fetch("api/getuserState", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -79,7 +79,7 @@ export default class Main extends React.Component {
   };
 
   showdata = () => {
-    fetch("http://localhost:3001/storeData", {
+    fetch("api/storeData", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -90,7 +90,7 @@ export default class Main extends React.Component {
 
   cancelstate = () => {
     const box = [localStorage.getItem("user")];
-    fetch("http://localhost:3001/cancelstate", {
+    fetch("api/cancelstate", {
       method: "post",
       headers: {
         "content-type": "application/json",
