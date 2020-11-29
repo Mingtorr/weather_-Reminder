@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 var time = moment().format("hh");
-var interval = setInterval(test, 1000);
+var interval = setInterval(test, 1000 * 60);
 var mailSender = {
   // 메일발송 함수
   sendGmail: function (param) {
@@ -50,7 +50,6 @@ var mailSender = {
     });
   },
 };
-
 async function weather_api(nx, ny, email) {
   var url = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=55&gridy=123";
 
@@ -64,21 +63,27 @@ async function weather_api(nx, ny, email) {
         let now = obj.wid.body[0].data[0];
         var body = JSON.parse(now.sky);
         var arr = [];
+        var temper = obj.wid.body[0].data;
+        var i = 0;
+        var j = 0;
         arr.push(obj.wid.body[0].data[0].pop[0]);
         arr.push(obj.wid.body[0].data[0].pty[0]);
         arr.push(obj.wid.body[0].data[0].reh[0]);
         arr.push(obj.wid.body[0].data[0].sky[0]);
-        if (obj.wid.body[0].data[0].tmn < -100) {
-          arr.push(obj.wid.body[0].data[1].tmn[0]);
-        } else {
-          arr.push(obj.wid.body[0].data[0].tmn[0]);
+        while (i < temper.length) {
+          if (temper[i].tmn[0] != "-999.0") {
+            arr.push(temper[i].tmn[0]);
+            break;
+          }
+          i++;
         }
-        if (obj.wid.body[0].data[0].tmx < -100) {
-          arr.push(obj.wid.body[0].data[1].tmx[0]);
-        } else {
-          arr.push(obj.wid.body[0].data[0].tmx[0]);
+        while (j < temper.length) {
+          if (temper[j].tmx[0] != "-999.0") {
+            arr.push(temper[j].tmx[0]);
+            break;
+          }
+          j++;
         }
-        arr.push(obj.wid.body[0].data[0].tmx[0]);
         arr.push(obj.wid.body[0].data[0].wfKor[0]);
         sendmailer(arr, email);
       });
@@ -92,8 +97,6 @@ function sendmailer(data, email) {
   const sky = data[3];
   const rain = data[1]; //rain = '1'
   var date3 = moment().format("YYYY 년 MM 월 DD 일");
-  var t1 = JSON.parse(data[4]);
-  var t2 = JSON.parse(data[5]);
   if (rain != "0") {
     let emailParam = {
       toEmail: email,
@@ -168,10 +171,10 @@ function werther_service() {
 function test() {
   var date = moment().format("hh:mm");
   time = moment().format("hh");
-  if (date.toString() === time.toString().concat(":00") || date === "0".concat(time.toString().concat(":00"))) {
+  if (date.toString() === time.toString().concat(":10") || date === "0".concat(time.toString().concat(":10"))) {
     clearInterval(interval);
     werther_service();
-    interval = setInterval(test, 1000);
+    interval = setInterval(test, 1000 * 60);
     interval;
   } else {
     console.log(date);
