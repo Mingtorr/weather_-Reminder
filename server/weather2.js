@@ -14,13 +14,13 @@ var xml2js = require("xml2js");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "snsk3779@",
+  password: "2ajrrhtlvj",
   database: "mydb",
 });
 
 connection.connect();
 
-var time = moment().format("mm");
+var time = moment().format("hh");
 var interval = setInterval(test, 1000);
 var mailSender = {
   // 메일발송 함수
@@ -68,7 +68,16 @@ async function weather_api(nx, ny, email) {
         arr.push(obj.wid.body[0].data[0].pty[0]);
         arr.push(obj.wid.body[0].data[0].reh[0]);
         arr.push(obj.wid.body[0].data[0].sky[0]);
-        arr.push(obj.wid.body[0].data[0].tmn[0]);
+        if (obj.wid.body[0].data[0].tmn < -100) {
+          arr.push(obj.wid.body[0].data[1].tmn[0]);
+        } else {
+          arr.push(obj.wid.body[0].data[0].tmn[0]);
+        }
+        if (obj.wid.body[0].data[0].tmx < -100) {
+          arr.push(obj.wid.body[0].data[1].tmx[0]);
+        } else {
+          arr.push(obj.wid.body[0].data[0].tmx[0]);
+        }
         arr.push(obj.wid.body[0].data[0].tmx[0]);
         arr.push(obj.wid.body[0].data[0].wfKor[0]);
         sendmailer(arr, email);
@@ -82,9 +91,10 @@ async function weather_api(nx, ny, email) {
 function sendmailer(data, email) {
   const sky = data[3];
   const rain = data[1]; //rain = '1'
-  console.log(data);
   var date3 = moment().format("YYYY 년 MM 월 DD 일");
-  if(rain != '0'){
+  var t1 = JSON.parse(data[4]);
+  var t2 = JSON.parse(data[5]);
+  if (rain != "0") {
     let emailParam = {
       toEmail: email,
       subject: "[날씨알리미]오늘은 비가 옵니다. 우산챙기세요!!!!!",
@@ -156,8 +166,8 @@ function werther_service() {
 
 // 아이디 중복체크
 function test() {
-  var date = moment().format("mm:ss");
-  time = moment().format("mm");
+  var date = moment().format("hh:mm");
+  time = moment().format("hh");
   if (date.toString() === time.toString().concat(":00") || date === "0".concat(time.toString().concat(":00"))) {
     clearInterval(interval);
     werther_service();
