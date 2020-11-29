@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import "./main.css";
 import umb from "./umbrella.png";
 import Main2 from "./main2";
 import Raining from "../login/rain";
-import Rain from "./rain.png";
 export default class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -106,6 +105,7 @@ export default class Main extends React.Component {
         progress2: "",
         main: <Main2 tounder={this.tounder} />,
         data: "",
+        cart: [],
       },
       this.cancelstate
     );
@@ -123,7 +123,7 @@ export default class Main extends React.Component {
 
         <div className="main1">
           <p style={{ marginRight: 10 }}>우산 알리미</p>
-          <img src={umb} height="30px" width="30px" />
+          <img src={umb} alt="" height="30px" width="30px" />
         </div>
         <div className="main2">
           {this.state.data}

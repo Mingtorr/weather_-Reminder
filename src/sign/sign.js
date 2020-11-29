@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import umb from "./umbrella.png";
 import "./sign.css";
 import Raining from "../login/rain";
@@ -31,7 +31,7 @@ export default class Sign extends React.Component {
   };
 
   checkpw = () => {
-    if (this.state.passwd === this.state.passwd2 && this.state.passwd != "") {
+    if (this.state.passwd === this.state.passwd2 && this.state.passwd !== "") {
       this.setState({
         checked_passwd: "비밀번호가 일치합니다.",
         checking_passwd: true,
@@ -135,8 +135,8 @@ export default class Sign extends React.Component {
       alert("아이디 중복검사를 해주세요");
     } else if (!(this.state.passwd === this.state.passwd2)) {
       alert("비밀번호가 일지하지 않습니다.");
-    }else if(checkpass === ""){
-      alert('비밀번호에 공백은 들어가서는 안됩니다.')
+    } else if (checkpass === "") {
+      alert("비밀번호에 공백은 들어가서는 안됩니다.");
     } else if (!this.state.checked_email) {
       alert("메일 인증을 해주세요");
     } else {
@@ -174,7 +174,7 @@ export default class Sign extends React.Component {
             <div className="login1">
               <div className="sign_title">
                 <p style={{ marginRight: 10 }}>회원가입</p>
-                <img src={umb} height="30px" width="30px" />
+                <img src={umb} alt="" height="30px" width="30px" />
               </div>
             </div>
             <div className="login2">

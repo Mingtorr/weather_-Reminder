@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import "./main.css";
-import umb from "./umbrella.png";
-import { markerdata } from "../markerdata";
 
 export default class Main2 extends React.Component {
   constructor(props) {
@@ -131,20 +129,29 @@ export default class Main2 extends React.Component {
         </div>
         <div>
           <select value={this.state.selected_citycode} onChange={this.selectChange1st}>
-            {this.state.citycode.map((d) => (
-              <option value={d}> {d}</option>
+            {this.state.citycode.map((d, index) => (
+              <option value={d} key={index}>
+                {" "}
+                {d}
+              </option>
             ))}
           </select>
 
           <select valuse={this.state.selected_city2} onChange={this.selectChange2st}>
-            {this.state.city2.map((d) => (
-              <option value={d}> {d}</option>
+            {this.state.city2.map((d, index) => (
+              <option value={d} key={index}>
+                {" "}
+                {d}
+              </option>
             ))}
           </select>
 
           <select valuse={this.state.selected_city3} onChange={this.selectChange3st}>
-            {this.state.city3.map((d) => (
-              <option value={d}> {d}</option>
+            {this.state.city3.map((d, index) => (
+              <option value={d} key={index}>
+                {" "}
+                {d}
+              </option>
             ))}
           </select>
         </div>
@@ -153,8 +160,11 @@ export default class Main2 extends React.Component {
         </div>
         <div id="email_time">
           <select value={this.state.selected} onChange={this.selectChange}>
-            {this.state.day.map((d) => (
-              <option value={d}> {d}:00</option>
+            {this.state.day.map((d, index) => (
+              <option value={d} key={index}>
+                {" "}
+                {d}:00
+              </option>
             ))}
           </select>
         </div>

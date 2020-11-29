@@ -5,15 +5,12 @@ const cors = require("cors");
 const bodyparser = require("body-parser");
 const mysql = require("mysql");
 // nodemailer 모듈 요청
-const nodemailer = require("nodemailer");
-//salt 암호화 모듈
-const crypto = require("crypto");
 var http = require("http").createServer(app);
 
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "snsk3779@",
+  password: "2ajrrhtlvj",
   database: "mydb",
 });
 

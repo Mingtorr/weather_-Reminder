@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./login.css";
 import Rain from "./rain.png";
-import water from "./water.png";
 import umb from "./umbrella.png";
 import Raining from "./rain";
 // import all the styles
@@ -27,9 +26,9 @@ class Login extends React.Component {
     if (this.state.id.length > 100 || this.state.passwd.length > 100 || this.state.email > 100) {
       alert("입력의 길이가 너무 깁니다!!");
       this.setState({
-        id:'',
-        passwd:''
-      })
+        id: "",
+        passwd: "",
+      });
       return;
     }
     const post = {
@@ -58,12 +57,12 @@ class Login extends React.Component {
           <Raining />
           <div className="login_picture">
             <div className="login_picture_in">
-              <img src={Rain} />
+              <img src={Rain} alt="" />
             </div>
           </div>
           <div className="login_title">
             <p>우산 알리미</p>
-            <img src={umb} height="30px" width="30px" />
+            <img src={umb} alt="" height="30px" width="30px" />
           </div>
           <div className="login_input">
             <div className="login_input_in">
