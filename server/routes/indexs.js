@@ -10,7 +10,7 @@ const crypto = require("crypto");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "2ajrrhtlvj",
+  password: "snsk3779@",
   database: "mydb",
 });
 
@@ -101,28 +101,57 @@ router.post("/Sendmail", (req, res) => {
   let emailParam = {
     toEmail: email,
     subject: "회원가입 인증 메일입니다.",
-    text: `<body style="margin: 0; padding: 0">
-   <div style="font-family:Apple SD Gothic Neo, sans-serif ; width: 540px; height: 600px; border-top: 4px solid #6f9df1;>
-     <h1 style=" margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400">
-     <span style="font-size: 20px; margin: 0 0 10px 3px">창원대 우산알리미</span>
-     <b style="color: #6f9df1">메일인증</b> 안내입니다.
-     </h1>
-     <p style="font-size: 16px; line-height: 26px; margin-top: 50px; padding: 0 5px; ">
-       안녕하세요.
-       <b style="color: #6f9df1">우산알리미</b>에 가입해 주셔서 진심으로
-       감사드립니다.
-       아래 <b style="color: #6f9df1">'인증 번호'</b>를 입력하여 회원가입을 완료해주세요.
-       감사합니다. <br />
-       인증번호: ${authNum}
-       <script>
-         document.write(authNumber);
-       </script>
-     </p>
-     <a style="color: #fff; text-decoration: none; text-align: center" href="{$auth_url}" target="_blank">
-       <p style="display: inline-block; width: 210px; height: 45px; margin: 30px 5px 40px; background: #2d73f5; line-height: 45px; vertical-align: middle; font-size: 16px;" class="move_wagle">우산알리미 홈페이지 이동</p>
-     </a>
-   </div>
- </body>`,
+    html: ` <body style="margin: 0; padding: 0">
+    <div style=
+      "font-family:Apple SD Gothic Neo, sans-serif ; width: 540px; height: 600px; border-top: 4px solid #6f9df1;
+      margin: 100px auto; padding: 30px 0; box-sizing: border-box; ">
+      <h1 style=" margin: 0; padding: 0 5px; font-size: 28px; font-weight: 400">
+      <span style="font-size: 15px; margin: 0 0 10px 3px">창원대 우산알리미</span><br />
+      <b style="color: #6f9df1">메일인증</b> 안내입니다.
+      </h1>
+      <p style="
+            font-size: 16px;
+            line-height: 26px;
+            margin-top: 50px;
+            padding: 0 5px;
+          ">
+        안녕하세요.<br />
+        <b style="color: #6f9df1">우산알리미</b>에 가입해 주셔서 진심으로
+        감사드립니다.<br />
+        아래
+        <b style="color: #6f9df1">'인증 번호'</b>를 입력하여 회원가입을 완료해
+        주세요.<br />
+        감사합니다. <br /><br />
+        인증번호: ${authNum}
+        <script>
+          document.write(authNumber);
+        </script>
+      </p>
+  
+      <a style="color: #fff; text-decoration: none; text-align: center" href="{$auth_url}" target="_blank">
+        <p style="
+              display: inline-block;
+              width: 210px;
+              height: 45px;
+              margin: 30px 5px 40px;
+              background: #2d73f5;
+              line-height: 45px;
+              vertical-align: middle;
+              font-size: 16px;
+            " class="move_wagle">
+          우산알리미 홈페이지 이동
+        </p>
+      </a>
+  
+      <div style="border-top: 1px solid #ddd; padding: 5px">
+        <p style="font-size: 13px; line-height: 21px; color: #555">
+          만약 버튼이 정상적으로 클릭되지 않는다면, 아래 링크를 복사하여 접속해
+          주세요.<br />
+          <a href="http://34.64.249.23/" style="text-decoration: underline; color: blue;">우산알리미</a>
+        </p>
+      </div>
+    </div>
+  </body>`,
   };
   connection.query("SELECT user_email FROM user_info WHERE user_email = (?)", [email], function (err, rows, fields) {
     if (rows[0] === undefined) {
@@ -169,13 +198,10 @@ var mailSender = {
   sendGmail: function (param) {
     var transporter = nodemailer.createTransport({
       service: "gmail",
-      prot: 587,
-      host: "smtp.gmail.com",
-      secure: false,
-      requireTLS: true,
+      prot: 465,
       auth: {
         user: "cwnunight@gmail.com",
-        pass: "a2586974",
+        pass: "qcqkmnyluawvkvbm",
       },
     });
     // 메일 옵션
@@ -183,7 +209,7 @@ var mailSender = {
       from: "cwnunight@gmail.com",
       to: param.toEmail, // 수신할 이메일
       subject: param.subject, // 메일 제목
-      text: param.text, // 메일 내용
+      html: param.html, // 메일 내용
     };
     // 메일 발송
     transporter.sendMail(mailOptions, function (error, info) {
