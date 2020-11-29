@@ -64,7 +64,7 @@ router.post("/login", async function (req, res, next) {
       if (dbPassword === hashPassword) {
         res.send(rows);
       } else {
-        console.log("비밀번호 불일치");
+        res.send(false);
       }
     }
   });

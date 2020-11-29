@@ -124,14 +124,19 @@ export default class Sign extends React.Component {
   };
   onSubmit = (e) => {
     e.preventDefault(); //이벤트 발생시 새로고침을 안하게 한다.
+    var checkpass = this.state.passwd;
+    checkpass = checkpass.replace(/(\s*)/g, "");
+    console.log(checkpass.charAt(0));
     if (this.state.id.length > 100 || this.state.passwd.length > 100) {
       alert("아이디와 비밀번호의 길이가 너무 깁니다!!");
       return;
     }
     if (!this.state.checked_id) {
       alert("아이디 중복검사를 해주세요");
-    } else if (!(this.state.pass === this.state.pass2)) {
+    } else if (!(this.state.passwd === this.state.passwd2)) {
       alert("비밀번호가 일지하지 않습니다.");
+    }else if(checkpass === ""){
+      alert('비밀번호에 공백은 들어가서는 안됩니다.')
     } else if (!this.state.checked_email) {
       alert("메일 인증을 해주세요");
     } else {
