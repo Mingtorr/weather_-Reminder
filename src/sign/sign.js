@@ -46,6 +46,10 @@ export default class Sign extends React.Component {
 
   sendEmail = (e) => {
     e.preventDefault();
+    if (this.state.email.length > 100) {
+      alert("이메일 길이가 너무 깁니다!");
+      return;
+    }
     this.setState({
       sendEmailClick: true,
     });

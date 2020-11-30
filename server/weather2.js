@@ -171,7 +171,7 @@ function werther_service() {
 function test() {
   var date = moment().format("hh:mm");
   time = moment().format("hh");
-  if (date.toString() === time.toString().concat(":10") || date === "0".concat(time.toString().concat(":10"))) {
+  if (date.toString() === time.toString().concat(":00") || date === "0".concat(time.toString().concat(":00"))) {
     clearInterval(interval);
     werther_service();
     interval = setInterval(test, 1000 * 60);

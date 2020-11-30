@@ -23,7 +23,7 @@ class Login extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.state.id.length > 100 || this.state.passwd.length > 100 || this.state.email > 100) {
+    if (this.state.id.length > 100 || this.state.passwd.length > 100) {
       alert("입력의 길이가 너무 깁니다!!");
       this.setState({
         id: "",
