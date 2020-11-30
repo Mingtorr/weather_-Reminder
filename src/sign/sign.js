@@ -79,6 +79,10 @@ export default class Sign extends React.Component {
   // 인증메일을 확인한다.
   authEmail = (e) => {
     e.preventDefault();
+    if (this.state.authNum > 100) {
+      alert("인증번호의 길이가 너무 깁니다.");
+      return;
+    }
     if (this.state.authNum.toString() === this.state.authCheckNum.toString()) {
       alert("인증성공");
       this.setState({
