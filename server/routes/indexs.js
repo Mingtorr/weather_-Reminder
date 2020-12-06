@@ -19,7 +19,7 @@ connection.connect();
 router.post("/CheckId", (req, res) => {
   const checkId = req.body.check_Id;
   connection.query("SELECT user_id FROM user_info WHERE user_id =(?)", [checkId], function (err, rows, fields) {
-    if (rows[0] === undefined) {
+    if (rows == undefined || rows[0] === undefined) {
       res.send(true); //중복 없음 사용가능
     } else {
       res.send(false); // 중복 있음 사용안됨

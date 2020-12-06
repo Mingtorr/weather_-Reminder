@@ -47,7 +47,7 @@ export default class Sign extends React.Component {
   sendEmail = (e) => {
     e.preventDefault();
     if (this.state.email.length > 100) {
-      alert("이메일 길이가 너무 깁니다!");
+      alert("이메일은 100자까지만 입력이 가능합니다");
       return;
     }
     this.setState({
@@ -79,7 +79,7 @@ export default class Sign extends React.Component {
   // 인증메일을 확인한다.
   authEmail = (e) => {
     e.preventDefault();
-    if (this.state.authNum > 100) {
+    if (this.state.authNum.length > 100) {
       alert("인증번호의 길이가 너무 깁니다.");
       return;
     }
@@ -144,7 +144,7 @@ export default class Sign extends React.Component {
     } else if (!(this.state.passwd === this.state.passwd2)) {
       alert("비밀번호가 일지하지 않습니다.");
     } else if (checkpass === "") {
-      alert("비밀번호에 공백은 들어가서는 안됩니다.");
+      alert("비밀번호에 공백포함할 수 없습니다.");
     } else if (!this.state.checked_email) {
       alert("메일 인증을 해주세요");
     } else {

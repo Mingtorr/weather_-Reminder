@@ -19,7 +19,7 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
-
+weather_api(68, 100, "eeeeeeeee");
 var time = moment().format("hh");
 var interval = setInterval(test, 1000 * 60);
 var mailSender = {
@@ -60,19 +60,26 @@ async function weather_api(nx, ny, email) {
     },
     function (error, response, body) {
       xml2js.parseString(body, function (err, obj) {
-        let now = obj.wid.body[0].data[0];
+        let now = obj.wid.body[0].data[2];
         var body = JSON.parse(now.sky);
         var arr = [];
         var temper = obj.wid.body[0].data;
+        var test = {};
         var i = 0;
         var j = 0;
-        arr.push(obj.wid.body[0].data[0].pop[0]);
-        arr.push(obj.wid.body[0].data[0].pty[0]);
-        arr.push(obj.wid.body[0].data[0].reh[0]);
-        arr.push(obj.wid.body[0].data[0].sky[0]);
+        arr.push(obj.wid.body[0].data[2].pop[0]);
+        arr.push(obj.wid.body[0].data[2].pty[0]);
+        arr.push(obj.wid.body[0].data[2].reh[0]);
+        arr.push(obj.wid.body[0].data[2].sky[0]);
+        test.pop = obj.wid.body[0].data[2].pop[0];
+        test.pty = obj.wid.body[0].data[2].pty[0];
+        test.reh = obj.wid.body[0].data[2].reh[0];
+        test.sky = obj.wid.body[0].data[2].sky[0];
+
         while (i < temper.length) {
           if (temper[i].tmn[0] != "-999.0") {
             arr.push(temper[i].tmn[0]);
+            test.tmn = temper[i].tmn[0];
             break;
           }
           i++;
@@ -80,10 +87,19 @@ async function weather_api(nx, ny, email) {
         while (j < temper.length) {
           if (temper[j].tmx[0] != "-999.0") {
             arr.push(temper[j].tmx[0]);
+            test.tmx = temper[j].tmx[0];
             break;
           }
           j++;
         }
+        console.log("{");
+        console.log("pop : " + arr[0] + ",");
+        console.log("pty : " + arr[1] + ",");
+        console.log("reh : " + arr[2] + ",");
+        console.log("sky : " + arr[3] + ",");
+        console.log("tmn : " + arr[4] + ",");
+        console.log("tmx : " + arr[5]);
+        console.log("}");
         arr.push(obj.wid.body[0].data[0].wfKor[0]);
         sendmailer(arr, email);
       });
