@@ -52,6 +52,7 @@ export default class Main2 extends React.Component {
     this.setState({
       selected_city2: e.target.value,
       city3: ["지역선택"],
+      check1:false,
     });
 
     const state = {
@@ -80,8 +81,8 @@ export default class Main2 extends React.Component {
       selected_citycode: e.target.value,
       city2: ["지역선택"],
       city3: ["지역선택"],
+      check1:false,
     });
-
     const state = {
       state: e.target.value,
     };
@@ -115,9 +116,13 @@ export default class Main2 extends React.Component {
     });
   };
   componentDidUpdate() {
+    console.log(this.state.check1);
     if (this.state.check1 === true && this.state.check2 === true) {
       const box = [this.state.selected, this.state.selected_citycode, this.state.selected_city2, this.state.selected_city3, this.state.selected_nx, this.state.selected_ny];
       this.props.tounder(box);
+    }else{
+      const box2 = []
+      this.props.tounder(box2);
     }
   }
 

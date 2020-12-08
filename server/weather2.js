@@ -14,14 +14,13 @@ var xml2js = require("xml2js");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "2ajrrhtlvj",
+  password: "snsk3779@",
   database: "mydb",
 });
 
 connection.connect();
-weather_api(68, 100, "eeeeeeeee");
-var time = moment().format("hh");
-var interval = setInterval(test, 1000 * 60);
+var time = moment().format("mm");
+var interval = setInterval(test, 1000);
 var mailSender = {
   // 메일발송 함수
   sendGmail: function (param) {
@@ -51,7 +50,7 @@ var mailSender = {
   },
 };
 async function weather_api(nx, ny, email) {
-  var url = "http://www.kma.go.kr/wid/queryDFS.jsp?gridx=55&gridy=123";
+  var url = `http://www.kma.go.kr/wid/queryDFS.jsp?gridx=${nx}&gridy=${ny}`;
 
   request(
     {
@@ -113,7 +112,7 @@ function sendmailer(data, email) {
   const sky = data[3];
   const rain = data[1]; //rain = '1'
   var date3 = moment().format("YYYY 년 MM 월 DD 일");
-  if (rain != "0") {
+  if (rain != "as") {
     let emailParam = {
       toEmail: email,
       subject: "[날씨알리미]오늘은 비가 옵니다. 우산챙기세요!!!!!",
@@ -185,12 +184,12 @@ function werther_service() {
 
 // 아이디 중복체크
 function test() {
-  var date = moment().format("hh:mm");
-  time = moment().format("hh");
+  var date = moment().format("mm:ss");
+  time = moment().format("mm");
   if (date.toString() === time.toString().concat(":00") || date === "0".concat(time.toString().concat(":00"))) {
     clearInterval(interval);
     werther_service();
-    interval = setInterval(test, 1000 * 60);
+    interval = setInterval(test, 1000);
     interval;
   } else {
     console.log(date);
