@@ -14,13 +14,13 @@ var xml2js = require("xml2js");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "snsk3779@",
+  password: "",
   database: "mydb",
 });
 
 connection.connect();
-var time = moment().format("mm");
-var interval = setInterval(test, 1000);
+var time = moment().format("hh");
+var interval = setInterval(test, 1000*60);
 var mailSender = {
   // 메일발송 함수
   sendGmail: function (param) {
@@ -112,7 +112,7 @@ function sendmailer(data, email) {
   const sky = data[3];
   const rain = data[1]; //rain = '1'
   var date3 = moment().format("YYYY 년 MM 월 DD 일");
-  if (rain != "as") {
+  if (rain != "0") {
     let emailParam = {
       toEmail: email,
       subject: "[날씨알리미]오늘은 비가 옵니다. 우산챙기세요!!!!!",
@@ -184,12 +184,12 @@ function werther_service() {
 
 // 아이디 중복체크
 function test() {
-  var date = moment().format("mm:ss");
-  time = moment().format("mm");
+  var date = moment().format("hh:mm");
+  time = moment().format("hh");
   if (date.toString() === time.toString().concat(":00") || date === "0".concat(time.toString().concat(":00"))) {
     clearInterval(interval);
     werther_service();
-    interval = setInterval(test, 1000);
+    interval = setInterval(test, 1000*60);
     interval;
   } else {
     console.log(date);
