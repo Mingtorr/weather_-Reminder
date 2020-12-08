@@ -11,7 +11,7 @@ export default class Main2 extends React.Component {
       selected_city3: "",
       selected_nx: "",
       selected_ny: "",
-      day: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+      day: ['시간입력', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
       citycode: ["지역선택", "서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치도", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도", "이어도"],
       city2: ["지역선택"],
       city3: ["지역선택"],
@@ -20,8 +20,6 @@ export default class Main2 extends React.Component {
     };
   }
   selectChange3st = (e) => {
-    console.log(e.target.value);
-
     this.setState({
       selected_city3: e.target.value,
     });
@@ -110,13 +108,19 @@ export default class Main2 extends React.Component {
       });
   };
   selectChange = (e) => {
-    this.setState({
-      selected: e.target.value,
-      check2: true,
-    });
+    if(e.target.value === "시간입력"){
+      this.setState({
+        check2: false,
+        selected: e.target.value,
+      });
+    }else{
+      this.setState({
+        selected: e.target.value,
+        check2: true,
+      });
+    }
   };
   componentDidUpdate() {
-    console.log(this.state.check1);
     if (this.state.check1 === true && this.state.check2 === true) {
       const box = [this.state.selected, this.state.selected_citycode, this.state.selected_city2, this.state.selected_city3, this.state.selected_nx, this.state.selected_ny];
       this.props.tounder(box);
@@ -165,12 +169,23 @@ export default class Main2 extends React.Component {
         </div>
         <div id="email_time">
           <select value={this.state.selected} onChange={this.selectChange}>
-            {this.state.day.map((d, index) => (
-              <option value={d} key={index}>
-                {" "}
-                {d}:00
-              </option>
-            ))}
+            {this.state.day.map((d, index) => {
+              if(index === 0){
+                return((
+                  <option value={d} key={index}>
+                    {" "}
+                    {d}
+                  </option>
+                ))
+              }else{
+                return((
+                  <option value={d} key={index}>
+                    {" "}
+                    {d}:00
+                  </option>
+                ))
+              }
+            })}
           </select>
         </div>
       </div>
