@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+날씨 알리미   
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+이 프로그램은 기상청 API 를 활용하여 강수 확률을 파악하고 우산 지참 여부를 메일을 통해 알려 주는 우산 알리
+미 프로그램이다. 예를 들어 출근하는 날 아침, 중요한 약속 1 시간 전 등 사용자가 원하는 시간을 설정하면 해당 시간
+에 강수량을 파악하여 우산의 지참 여부를 알려준다.
 
-## Available Scripts
+|OS| WINDOWS 10 EDU|
+-|-
+DB | mysql Ver 8.0.21 for Win64 on x86_64 (MySQL Community Server - GPL)
+Front-end Language | javasript – react 라이브러리
+Back-end Language | Node.js
+Development IDE |  Visual studio code
 
-In the project directory, you can run:
+# Usage
+1. npm run start   
+2. cd server && node server.js
+3. cd server && weather2.js
 
-### `npm start`
+# DATABASE modeling
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![image](https://user-images.githubusercontent.com/59681325/116586995-fe13f580-a954-11eb-9996-434982c97355.png)
+![image](https://user-images.githubusercontent.com/59681325/116587033-0b30e480-a955-11eb-8d4c-e09ba954a887.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+# Use-Case Diagram
+![image](https://user-images.githubusercontent.com/59681325/116586674-aecdc500-a954-11eb-86e6-85d10098ed61.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Class Diagram
 
-### `npm run build`
+![image](https://user-images.githubusercontent.com/59681325/116587101-1a179700-a955-11eb-9646-82e97339982a.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Sequence Diagram
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![image](https://user-images.githubusercontent.com/59681325/116587240-43382780-a955-11eb-82d9-2ded90bdf7ff.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# result 
+![image](https://user-images.githubusercontent.com/59681325/116587924-e721d300-a955-11eb-904c-53fc4d0bda92.png)
 
-### `npm run eject`
+![image](https://user-images.githubusercontent.com/59681325/116587951-f143d180-a955-11eb-85ed-22509394c864.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![image](https://user-images.githubusercontent.com/59681325/116587975-f7d24900-a955-11eb-986a-a9a457d5832a.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![image](https://user-images.githubusercontent.com/59681325/116588016-002a8400-a956-11eb-9b75-32a3728000f0.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![image](https://user-images.githubusercontent.com/59681325/116588028-0456a180-a956-11eb-998e-7fce3078c28f.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
